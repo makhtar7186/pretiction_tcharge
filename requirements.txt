@@ -1,17 +1,17 @@
-tensorflow ,
-pandas ,
-seaborn ,
-matplotlib ,
-jupyter ,
-ipykernel ,
-scikit-learn ,
-elasticsearch ,
-datetime ,
-dotenv ,
-fastapi ,
-pydantic ,
-streamlit ,
-unicorn ,
-uvicorn ,
-plotly ,
+tensorflow 
+pandas 
+seaborn 
+matplotlib 
+jupyter 
+ipykernel 
+scikit-learn 
+elasticsearch 
+datetime 
+dotenv 
+fastapi 
+pydantic 
+streamlit 
+unicorn 
+uvicorn 
+plotly 
 streamlit-autorefresh 
