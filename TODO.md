@@ -1,0 +1,6 @@
+- [x] Create a new FastAPI app file (src/tauxcharge/api.py)
+- [x] Initialize the necessary objects (ElasticFetcher, CNNLSTMRegressor, CustomPreprocessor, SequenceGenerator) once at startup
+- [x] Refactor the prediction loop logic into a function that can be called on demand
+- [x] Create a /predict endpoint that triggers the prediction function and returns the prediction results as JSON
+- [x] Optionally add a root endpoint for health check
+- [x] Provide instructions to run the FastAPI app with uvicorn
