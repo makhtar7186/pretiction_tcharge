@@ -42,7 +42,7 @@ st.caption("Interface interactive pour comparer les données réelles et les pr�
 # ----------------------
 with st.sidebar:
     st.header("⚙️ Paramètres")
-    day_range = st.slider("Fenêtre (jours) à récupérer", min_value=1, max_value=30, value=13, step=1)
+    day_range = st.slider("Fenêtre (jours) à récupérer", min_value=1, max_value=120, value=13, step=1)
     resample_rule = st.selectbox("Agrégation temporelle", options=["None (5min natif)", "15min", "30min", "60min"], index=0)
     show_altair = st.toggle("Activer un tracé Altair supplémentaire", value=False)
     show_full_pred = st.toggle(
