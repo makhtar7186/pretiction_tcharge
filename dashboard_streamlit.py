@@ -261,7 +261,7 @@ kpis = compute_kpis(df_overlap)
 c1, c2, c3 = st.columns(3)
 c1.metric("MAE", f"{kpis['MAE']:.4f}" if np.isfinite(kpis['MAE']) else "—")
 c2.metric("RMSE", f"{kpis['RMSE']:.4f}" if np.isfinite(kpis['RMSE']) else "—")
-c3.metric("MAPE (%)", f"{kpis['MAPE (%)']:.2f}%" if np.isfinite(kpis['MAPE (%)']) else "—")
+c3.metric("R2 (%)", f"{kpis['R2 (%)']:.2f}%" if np.isfinite(kpis['R2 (%)']) else "—")
 
 # ----------------------
 # Comparative line chart
