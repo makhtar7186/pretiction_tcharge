@@ -64,38 +64,13 @@ if auto_refresh:
 # ----------------------
 import numpy as np
 
-def _safe_r2(y_true: np.ndarray, y_pred: np.ndarray) -> float:
-    y_true = np.asarray(y_true).reshape(-1)
-    y_pred = np.asarray(y_pred).reshape(-1)
-
-    # Alignement des tailles
-    n = min(len(y_true), len(y_pred))
-    y_true = y_true[:n]
-    y_pred = y_pred[:n]
-
-    # Suppression des valeurs non finies
-    mask = np.isfinite(y_true) & np.isfinite(y_pred)
-    y_true, y_pred = y_true[mask], y_pred[mask]
-
-    # Cas dégénéré : variance nulle
-    if y_true.size == 0 or np.allclose(y_true, y_true.mean()):
-        return 0.0
-
-    # Somme des carrés
-    ss_res = np.sum((y_true - y_pred) ** 2)
-    ss_tot = np.sum((y_true - y_true.mean()) ** 2)
-
-    return float(1.0 - ss_res / ss_tot)
-
-
 def compute_kpis(df_merge_name: pd.DataFrame) -> dict:
     if df_merge_name.empty:
-        return {"MAE": np.nan, "RMSE": np.nan, "R2 (%)": np.nan}
+        return {"MAE": np.nan, "RMSE": np.nan}
     err = df_merge_name["taux_de_charge"] - df_merge_name["predicted_taux_de_charge"]
     mae = float(np.mean(np.abs(err)))
-    rmse = float(np.sqrt(np.mean(err**2)))
-    R2 = _safe_r2(df_merge_name["taux_de_charge"].values, df_merge_name["predicted_taux_de_charge"].values)
-    return {"MAE": mae, "RMSE": rmse, "R2 (%)": R2}
+    rmse = float(np.sqrt(np.mean(err**2))))
+    return {"MAE": mae, "RMSE": rmse}
 
 def _try_fetch_pred_full(elt_save, day: int) -> pd.DataFrame:
     """
@@ -258,10 +233,9 @@ df_overlap = df_merge_all[df_merge_all["names"] == name_selected].sort_values("d
 # KPI Cards (sur recouvrement)
 # ----------------------
 kpis = compute_kpis(df_overlap)
-c1, c2, c3 = st.columns(3)
+c1, c2 = st.columns(3)
 c1.metric("MAE", f"{kpis['MAE']:.4f}" if np.isfinite(kpis['MAE']) else "—")
 c2.metric("RMSE", f"{kpis['RMSE']:.4f}" if np.isfinite(kpis['RMSE']) else "—")
-c3.metric("R2 (%)", f"{kpis['R2 (%)']:.2f}%" if np.isfinite(kpis['R2 (%)']) else "—")
 
 # ----------------------
 # Comparative line chart
