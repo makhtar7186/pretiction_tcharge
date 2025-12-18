@@ -69,7 +69,7 @@ def compute_kpis(df_merge_name: pd.DataFrame) -> dict:
         return {"MAE": np.nan, "RMSE": np.nan}
     err = df_merge_name["taux_de_charge"] - df_merge_name["predicted_taux_de_charge"]
     mae = float(np.mean(np.abs(err)))
-    rmse = float(np.sqrt(np.mean(err**2))))
+    rmse = float(np.sqrt(np.mean(err**2)))
     return {"MAE": mae, "RMSE": rmse}
 
 def _try_fetch_pred_full(elt_save, day: int) -> pd.DataFrame:
