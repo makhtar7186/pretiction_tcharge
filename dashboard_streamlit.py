@@ -233,7 +233,7 @@ df_overlap = df_merge_all[df_merge_all["names"] == name_selected].sort_values("d
 # KPI Cards (sur recouvrement)
 # ----------------------
 kpis = compute_kpis(df_overlap)
-c1, c2 = st.columns(3)
+c1, c2 = st.columns(2)
 c1.metric("MAE", f"{kpis['MAE']:.4f}" if np.isfinite(kpis['MAE']) else "—")
 c2.metric("RMSE", f"{kpis['RMSE']:.4f}" if np.isfinite(kpis['RMSE']) else "—")
 
