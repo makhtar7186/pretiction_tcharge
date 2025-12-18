@@ -62,24 +62,40 @@ if auto_refresh:
 # ----------------------
 # Helpers
 # ----------------------
-def _safe_mape(y_true: np.ndarray, y_pred: np.ndarray) -> float:
+import numpy as np
+
+def _safe_r2(y_true: np.ndarray, y_pred: np.ndarray) -> float:
     y_true = np.asarray(y_true).reshape(-1)
     y_pred = np.asarray(y_pred).reshape(-1)
+
+    # Alignement des tailles
     n = min(len(y_true), len(y_pred))
-    y_true = y_true[:n]; y_pred = y_pred[:n]
+    y_true = y_true[:n]
+    y_pred = y_pred[:n]
+
+    # Suppression des valeurs non finies
     mask = np.isfinite(y_true) & np.isfinite(y_pred)
     y_true, y_pred = y_true[mask], y_pred[mask]
-    denom = np.where(np.abs(y_true) < 1e-8, 1e-8, np.abs(y_true))
-    return float(np.mean(np.abs((y_true - y_pred) / denom)) * 100.0)
+
+    # Cas dégénéré : variance nulle
+    if y_true.size == 0 or np.allclose(y_true, y_true.mean()):
+        return 0.0
+
+    # Somme des carrés
+    ss_res = np.sum((y_true - y_pred) ** 2)
+    ss_tot = np.sum((y_true - y_true.mean()) ** 2)
+
+    return float(1.0 - ss_res / ss_tot)
+
 
 def compute_kpis(df_merge_name: pd.DataFrame) -> dict:
     if df_merge_name.empty:
-        return {"MAE": np.nan, "RMSE": np.nan, "MAPE (%)": np.nan}
+        return {"MAE": np.nan, "RMSE": np.nan, "R2 (%)": np.nan}
     err = df_merge_name["taux_de_charge"] - df_merge_name["predicted_taux_de_charge"]
     mae = float(np.mean(np.abs(err)))
     rmse = float(np.sqrt(np.mean(err**2)))
-    mape = _safe_mape(df_merge_name["taux_de_charge"].values, df_merge_name["predicted_taux_de_charge"].values)
-    return {"MAE": mae, "RMSE": rmse, "MAPE (%)": mape}
+    R2 = _safe_r2(df_merge_name["taux_de_charge"].values, df_merge_name["predicted_taux_de_charge"].values)
+    return {"MAE": mae, "RMSE": rmse, "R2 (%)": R2}
 
 def _try_fetch_pred_full(elt_save, day: int) -> pd.DataFrame:
     """
