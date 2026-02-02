@@ -73,7 +73,7 @@ poetry run python -m prediction_tauxcharge
 Il exécutera :
 
 -   La récupération des dernières données d’ElasticSearch.
--   La génération des séquences (288 valeurs) pour chaque names.
+-   La génération des séquences (2016 valeurs) pour chaque names.
 -   La prédiction du modèle LSTM.
 -   L’affichage ou l’enregistrement des résultats.
 
@@ -123,4 +123,5 @@ elastic/
 -   Creer un sous-shell ```poetry shell```
 
 -   Ensuite lance l'execution# prediction_taux_charge
+
 
