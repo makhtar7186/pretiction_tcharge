@@ -13,25 +13,45 @@
 
 tauxcharge/
 ├── src/
-│    ├── tauxcharge/   
+
+│    ├── tauxcharge/ 
+
 │    │   ├── __init__.py
+
 │    │   ├── __main__.py
+
 │    │   ├── preprocessing/
+
 │    │   │   ├── sequence_generator.py
+
 │    │   │   ├── splitter.py
+
 │    │   │   ├── custom_preprocessor.py
+
 │    │   ├── model/
+
 │    │   │   ├── regressor.py
+
 │    │   │   ├── all_model/ #dossier ou se trouve l'ensemble des models sauvegarder
+
 │    │   ├── elastic/
+
 │    │   │   └── elasticsearch.py
+
 │    │
+
 ├── tests/
+
 │   └── test_pipeline.py
+
 │
+
 ├── .env
+
 ├── pyproject.toml
+
 ├── poetry.lock
+
 ├── README.md
 
 
@@ -100,4 +120,5 @@ elastic/
 -   Placez vous sur le repertoire du projet cd/vers/le/projet
 -   Taper la commande reproducibilité `poetry install`
 -   Creer un sous-shell ```poetry shell```
+
 -   Ensuite lance l'execution# prediction_taux_charge
