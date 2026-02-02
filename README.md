@@ -6,7 +6,8 @@
 
 ==> 🚀 `Objectifs`
 -   Prédire la charge (target) pour chaque names toutes les 5 minutes.
--   Utiliser les 288 dernières valeurs de chaque names pour alimenter le modèle.
+-   Utiliser les 2016 dernières valeurs de chaque names pour alimenter le modèle.
+-   prédire les valeurs sur un intervalle de 5 jours soit 1440 valeurs a prédire 
 -   Sauvegarder les prédictions ou les afficher.
 
 ==> 📂 `Structure du projet`
@@ -122,3 +123,4 @@ elastic/
 -   Creer un sous-shell ```poetry shell```
 
 -   Ensuite lance l'execution# prediction_taux_charge
+
